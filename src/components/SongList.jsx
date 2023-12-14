@@ -1,6 +1,9 @@
-const SongList = ({ song }) => {
+const SongList = ({ song, getSongData }) => {
   return (
-    <div className="flex items-start bg-[#10368395] rounded-md px-3 py-3">
+    <div
+      className="flex items-start bg-[#10368395] rounded-md px-3 py-3 cursor-pointer"
+      onClick={() => getSongData(song)}
+    >
       <img
         src={song.images?.coverarthq}
         alt="Song Cover"

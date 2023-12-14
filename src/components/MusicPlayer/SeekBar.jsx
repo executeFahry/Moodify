@@ -1,22 +1,17 @@
-import React from "react";
-
-const SeekBar = ({ value, min, max, onInput }) => {
-  const getTime = (time) =>
-    `${Math.floor(time / 60)}:${`0${Math.floor(time % 60)}`.slice(-2)}`;
-
+const SeekBar = ({ currentSong, checkWidth, clickRef }) => {
   return (
-    <div className="seek-bar sm:flex flex-row items-center">
-      <p className="text-white">{value === 0 ? "0:00" : getTime(value)}</p>
-      <input
-        type="range"
-        step="any"
-        value={value}
-        min={min}
-        max={max}
-        onInput={onInput}
-        className="md:block w-24 md:w-56 2xl:w-[25rem] h-1 mx-4 2xl:mx-6 rounded-lg"
-      />
-      <p className="text-white">{max === 0 ? "0:00" : getTime(max)}</p>
+    <div className="seek_bar w-1/2">
+      <div
+        className="seek_bar_wrapper min-w-full bg-slate-50 h-1 rounded-lg cursor-pointer"
+        ref={clickRef}
+        onClick={(e) => checkWidth(e)}
+        onMouseMove={(e) => checkWidth(e)}
+      >
+        <div
+          className="seek_bar_progress w-0 h-full rounded-lg bg-blue-500"
+          style={{ width: `${currentSong.progress + "%"}` }}
+        ></div>
+      </div>
     </div>
   );
 };
