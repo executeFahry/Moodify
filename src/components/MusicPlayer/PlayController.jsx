@@ -17,19 +17,17 @@ const PlayController = ({
 }) => {
   const clickRef = useRef();
 
-  const PlayPause = () => {
+  const playPause = () => {
     setIsPlaying(!isPlaying);
   };
 
   const checkWidth = (e) => {
-    // console.log("Event object:", e);
     if (!clickRef.current) return;
 
     let width = clickRef.current.clientWidth; // width
     let clickX = e.nativeEvent.offsetX; // offset
 
     let divProgress = (clickX / width) * 100; // percentage
-    // console.log("->", divProgress);
     audioElement.current.currentTime = (divProgress * currentSong.length) / 100; // current time
   };
 
@@ -67,28 +65,26 @@ const PlayController = ({
 
   return (
     <>
-      <div>
-        <div className="controls container flex items-center justify-center gap-5">
-          <BiSkipPreviousCircle
-            className="text-white hover:text-[#103783] text-3xl cursor-pointer"
-            onClick={previousSong}
+      <div className="controls container flex items-center justify-center gap-5">
+        <BiSkipPreviousCircle
+          className="text-white hover:text-[#103783] text-3xl cursor-pointer"
+          onClick={previousSong}
+        />
+        {isPlaying ? (
+          <BiPauseCircle
+            className="text-white hover:text-[#103783] text-5xl cursor-pointer"
+            onClick={playPause}
           />
-          {isPlaying ? (
-            <BiPauseCircle
-              className="text-white hover:text-[#103783] text-5xl cursor-pointer"
-              onClick={PlayPause}
-            />
-          ) : (
-            <BiPlayCircle
-              className="text-white hover:text-[#103783] text-5xl cursor-pointer"
-              onClick={PlayPause}
-            />
-          )}
-          <BiSkipNextCircle
-            className="text-white hover:text-[#103783] text-3xl cursor-pointer"
-            onClick={nextSong}
+        ) : (
+          <BiPlayCircle
+            className="text-white hover:text-[#103783] text-5xl cursor-pointer"
+            onClick={playPause}
           />
-        </div>
+        )}
+        <BiSkipNextCircle
+          className="text-white hover:text-[#103783] text-3xl cursor-pointer"
+          onClick={nextSong}
+        />
       </div>
       <SeekBar
         currentSong={currentSong}

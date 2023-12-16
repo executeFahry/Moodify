@@ -1,11 +1,6 @@
-import SongList from "../src/components/SongList";
-import { useSongs } from "../src/services/store";
+import { useSongs } from "../services/store";
 
 const songs = useSongs.getState();
-const [currentSong, setCurrentSong] = useState(songs[0].hub?.actions[1]);
-
-
-
 
 // Creating a node
 class Node {
@@ -31,7 +26,7 @@ class DoublyLinkedList {
    }
 
    // push node to DLL
-   push(name, length, path) {
+   push(title, subtitle, images, genre) {
       const newNode = new Node(title, subtitle, images, genre);
       if (this.length === 0) {
          this.head = newNode;
